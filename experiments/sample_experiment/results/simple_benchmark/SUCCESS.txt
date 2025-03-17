@@ -1,0 +1,2 @@
+SUCCESS: All benchmark runs completed successfully!
+The last run was 60/60

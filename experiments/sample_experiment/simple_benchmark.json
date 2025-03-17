@@ -1,0 +1,19 @@
+{
+    "N": [100],
+    "seed": [0],
+    "detector_name": ["orb", "sift", "rsift", "brisk", "kaze", "akaze"],
+    "matcher_name": ["bf"],
+    "filter_type": ["ratio"],
+    "transformation_type": ["projective"],
+    "clahe": [false],
+    "downsample_ratio": [0.5],
+    "max_features": [2000],
+    "ref_multiplier": [2.0],
+    "mask_use": [true],
+    "filter_ratio": [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0],
+    "ransac_method": [38],
+    "ransac_epipolar_threshold": [{ "orb": 2.0, "sift": 3, "rsift": 3, "brisk": 2.5, "kaze": 2.5, "akaze": 2.5 }],
+    "ransac_max_iter": [5000],
+    "ransac_confidence": [0.999999],
+    "gpu": [false]
+}

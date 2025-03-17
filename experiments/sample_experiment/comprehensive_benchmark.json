@@ -1,0 +1,19 @@
+{
+    "N": [100],
+    "seed": [0],  
+    "detector_name": ["orb", "sift", "rsift", "brisk", "kaze", "akaze"],
+    "matcher_name": ["bf", "flann"],
+    "filter_type": ["ratio", "distance"],
+    "transformation_type": ["projective"],
+    "clahe": [true, false],
+    "downsample_ratio": [1.0, 0.8333, 0.6666, 0.5, 0.3333, 0.25, 0.1666, 0.0833],
+    "max_features": [1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000],
+    "ref_multiplier": [1.0, 2.0, 3.0, 4.0],
+    "mask_use": [true, false],
+    "filter_ratio": [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0],
+    "ransac_method": [8, 32, 33, 35, 36, 37, 38],
+    "ransac_epipolar_threshold": [0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0, 2.25, 2.5, 2.75, 3.0, 3.25, 3.5, 3.75, 4.0],
+    "ransac_max_iter": [2500, 5000, 7500, 10000],
+    "ransac_confidence": [0.999999, 0.99999, 0.9999, 0.999, 0.99],
+    "gpu": [false]
+}

@@ -1,0 +1,43 @@
+[project]
+name = "stabilo-optimize"
+version = "1.0.0"
+description = "Stabilo Optimize: A Framework for Comprehensive Evaluation and Analysis for the Stabilo Library"
+authors = [
+    { name = "Robert Fonod", email = "robert.fonod@ieee.org" },
+]
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.9"
+keywords = ["hyperparameter-optimization", "grid-search", "image-registration", "homography-estimation", "feature-matching", "RANSAC-algorithms", "aerial-video-analysis", "object-stabilization", "computer-vision"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",        
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Software Development",
+    "Topic :: Multimedia :: Video",
+]
+
+[project.urls]
+Homepage = "https://github.com/rfonod/stabilo-optimize/"
+Repository = "https://github.com/rfonod/stabilo-optimize/"
+Changelog = "https://github.com/rfonod/stabilo-optimize/releases"
+Issues = "https://github.com/rfonod/stabilo-optimize/issues/"
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+select = ['E', 'F', 'W', 'A', "B", 'PLC', 'PLE', 'PLW', 'I']
+
+[tool.ruff.format]
+docstring-code-format = true
+quote-style = "preserve"

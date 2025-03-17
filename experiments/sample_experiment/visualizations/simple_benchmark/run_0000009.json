@@ -1,0 +1,17 @@
+{
+    "detector_name": "orb",
+    "matcher_name": "bf",
+    "filter_type": "ratio",
+    "transformation_type": "projective",
+    "clahe": false,
+    "downsample_ratio": 0.5,
+    "max_features": 2000,
+    "ref_multiplier": 2.0,
+    "mask_use": true,
+    "filter_ratio": 0.9,
+    "ransac_method": 38,
+    "ransac_epipolar_threshold": 2.0,
+    "ransac_max_iter": 5000,
+    "ransac_confidence": 0.999999,
+    "gpu": false
+}
