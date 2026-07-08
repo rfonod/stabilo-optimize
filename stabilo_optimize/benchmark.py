@@ -19,11 +19,16 @@ Options:
     -e, --experiment-dir    Directory to save the benchmark results [default: parent directory of the config file(s)]
     -o, --overwrite         Overwrite the results of the previous benchmark run
     -r, --resume            Resume the benchmark from the last run
-    -v, --verbosity         Verbosity level (0: quiet, 1: minimal, 2: detailed, 3: debug) [default: 0]
+    -v, --verbosity         Verbosity level [default: 0]
+                                0: quiet    - top-level status only; stabilo's own log messages fully suppressed
+                                1: minimal  - + per-run hyperparameter header and summary table; stabilo errors only
+                                2: detailed - + per-scene summary table; stabilo warnings and up
+                                3: debug    - + per-trial output; stabilo info and up
     -msc, --mask-start-col  The column index where the mask values start in the bounding box file [default: 1]
     -sp, --save-plots       Save the plots to the benchmark/plots directory
     -s, --show-visualization Visualize the benchmarking process
     -sv, --save-visualization Save the visualization of the benchmarking process
+    -l, --log-file          Filepath to also write console output to (prints the resolved path used) [default: none]
 
 Note:
 - All scenes should be placed in the 'scenes' directory of the given experiment directory
@@ -56,6 +61,7 @@ import torch
 from stabilo import Stabilizer
 from tqdm import tqdm
 
+from stabilo_optimize.utils.logging_utils import configure_stabilo_logging, tee_stdout_to_file
 from stabilo_optimize.utils.plot import plot_results
 from stabilo_optimize.utils.visualize import get_video_writer, render_stabilization_visuals
 
@@ -66,6 +72,7 @@ def run_benchmarks(source: Path, args: argparse.Namespace) -> None:
     """
     Run the benchmark with the given configuration file(s).
     """
+    configure_stabilo_logging(args.verbosity)
 
     # Check if the source is a directory
     if source.is_dir():
@@ -788,7 +795,13 @@ def parse_cli_args() -> argparse.Namespace:
     exclusive_group = parser.add_mutually_exclusive_group()
     exclusive_group.add_argument("-o", "--overwrite", action="store_true", help="Overwrite previous benchmark results")
     exclusive_group.add_argument("--resume", "-r", action="store_true", help="Resume the benchmark from the last run")
-    parser.add_argument("--verbosity", "-v", type=int, default=0, choices=[0, 1, 2, 3], help="Verbosity level")
+    parser.add_argument(
+        "--verbosity", "-v", type=int, default=0, choices=[0, 1, 2, 3],
+        help="Verbosity level: 0=quiet (top-level status only; stabilo's own log messages fully suppressed), "
+             "1=minimal (+ per-run hyperparameter header and summary table; stabilo errors only), "
+             "2=detailed (+ per-scene summary table; stabilo warnings and up), "
+             "3=debug (+ per-trial output; stabilo info and up) [default: 0]",
+    )
 
     # Mask options
     parser.add_argument("--mask-start-col", "-msc", type=int, default=1, help="Column index where mask values start in the bbox file")
@@ -798,13 +811,17 @@ def parse_cli_args() -> argparse.Namespace:
     parser.add_argument("--show-visualization", "-s", action="store_true", help="Visualize the benchmarking process")
     parser.add_argument("--save-visualization", "-sv", action="store_true", help="Save the visualization of the benchmarking process")
 
+    # Logging options
+    parser.add_argument("--log-file", "-l", type=Path, default=None, help="Filepath to also write console output to (parent directories are created if needed)")
+
     return parser.parse_args()
 
 
 def main() -> None:
     """Entry point for the 'stabilo-optimize benchmark' subcommand."""
     args = parse_cli_args()
-    run_benchmarks(args.source, args)
+    with tee_stdout_to_file(args.log_file):
+        run_benchmarks(args.source, args)
 
 
 if __name__ == "__main__":

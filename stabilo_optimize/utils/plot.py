@@ -24,6 +24,7 @@ Options:
     --hea-threshold, -ht <float>: Threshold (in pixels) for Homography Estimation Accuracy (default: 1.0)
     --miou-detail, -md <int>: Detail level for MIoU plots (1=average only, 2=average+minimum)
     --quiet, -q: Whether to suppress console output
+    --log-file, -l <path>: Filepath to also write console output to (default: none)
 
 Example:
     stabilo-optimize plot experiments/example/sample.json -s -md 2
@@ -37,6 +38,8 @@ from typing import Any, Dict, Optional, Tuple
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+
+from stabilo_optimize.utils.logging_utils import tee_stdout_to_file
 
 
 def plot_results(source: Path, experiment_dir: Optional[Path] = None, show_plots: bool = False, save_plots: bool = False, overwrite: bool = False, hea_threshold: float = 1.0, miou_detail: int = 1, quiet: bool = False) -> None:
@@ -374,13 +377,18 @@ def parse_cli_args() -> argparse.Namespace:
     parser.add_argument("--hea-threshold", "-ht", type=float, default=1.0, help="Threshold (in pixels) for the Homography Estimation Accuracy (HEA)")
     parser.add_argument("--miou-detail", "-md", type=int, default=1, help="Detail level for MIoU plots: 1 for average only, 2 for both average and minimum")
 
+    # Logging options
+    parser.add_argument("--log-file", "-l", type=Path, default=None, help="Filepath to also write console output to (parent directories are created if needed)")
+
     return parser.parse_args()
 
 
 def main() -> None:
     """Entry point for the 'stabilo-optimize plot' subcommand."""
-    args = parse_cli_args()
-    plot_results(**vars(args))
+    args_dict = vars(parse_cli_args())
+    log_file = args_dict.pop('log_file')
+    with tee_stdout_to_file(log_file):
+        plot_results(**args_dict)
 
 
 if __name__ == "__main__":

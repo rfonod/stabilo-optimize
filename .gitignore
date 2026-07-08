@@ -40,6 +40,9 @@ sdist/
 .coverage
 coverage.xml
 
+# Log files (stabilo-optimize's -l/--log-file output)
+*.log
+
 # Mac OS-specific storage files
 .DS_Store
 **/.DS_Store

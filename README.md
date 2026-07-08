@@ -46,6 +46,10 @@ stabilo-optimize benchmark experiments/sample_experiment/simple_benchmark.json -
 - `-sv`: Save benchmark visualization video.
 - `-o`: Overwrite previous results.
 
+Add `-l <path>`/`--log-file <path>` (also available on `plot`) to additionally write console output to a file — parent directories are created automatically, color codes are stripped in the file, the resolved absolute path is printed to the console, and log files are gitignored (`*.log`) by default.
+
+`-v`/`--verbosity` (`benchmark` only) controls how much detail is printed, including from Stabilo's own internal logging: `0`=quiet (top-level status only, Stabilo's own messages fully suppressed), `1`=minimal (+ per-run header/summary table, Stabilo errors only), `2`=detailed (+ per-scene summary table, Stabilo warnings and up), `3`=debug (+ per-trial output, Stabilo info and up).
+
 Use `stabilo-optimize benchmark --help` to explore additional command-line options, or re-plot existing results without re-running the benchmark:
 
 ```bash
