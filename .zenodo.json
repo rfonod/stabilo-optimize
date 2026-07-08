@@ -1,0 +1,80 @@
+{
+  "title": "Stabilo Optimize: A Framework for Comprehensive Evaluation and Analysis for the Stabilo Library",
+  "upload_type": "software",
+  "version": "1.1.0",
+  "description": "<p dir=\"auto\"><strong>Stabilo-Optimize</strong> is a Python benchmarking tool designed specifically to evaluate and tune methods and hyperparameters of the <a href=\"https://github.com/rfonod/stabilo\">Stabilo</a> 🌀 library for video and track stabilization tasks. It systematically generates performance evaluations through random perturbations, eliminating the need for ground-truth homographies. This tool significantly simplifies the optimization of stabilization techniques, making it ideal for high-precision tasks in fields such as urban monitoring, traffic analysis, and drone imagery processing.</p>\n<p dir=\"auto\">📌 <strong>Important:</strong> If you use this code in your work, kindly acknowledge it by citing the following article:</p>\n<blockquote>\n<p dir=\"auto\"><strong>Robert Fonod, Haechan Cho, Hwasoo Yeo, Nikolas Geroliminis</strong> (2025). <em>Advanced computer vision for extracting georeferenced vehicle trajectories from drone imagery</em>, Transportation Research Part C: Emerging Technologies, vol. 178, 105205. DOI: <a href=\"https://doi.org/10.1016/j.trc.2025.105205\" rel=\"nofollow\">10.1016/j.trc.2025.105205</a></p>\n</blockquote>\n<h2 dir=\"auto\">Why Stabilo-Optimize</h2>\n<ul dir=\"auto\">\n<li><strong>Ground Truth-Free Benchmarking</strong>: Randomly generates photometric and homographic perturbations (brightness variations, Gaussian blur, saturation adjustments, fog effects, rotations, translations, scales, and perspective shifts).</li>\n<li><strong>Hierarchical Benchmarking Strategy</strong>: Encourages users to systematically vary hyperparameters hierarchically for efficient parameter optimization.</li>\n<li><strong>Flexible JSON Configuration</strong>: Customize extensive parameter settings using nested dictionaries.</li>\n<li><strong>Result Visualization</strong>: Generates comprehensive performance plots and benchmarking process visualizations.</li>\n</ul>\n<details>\n<summary><b>🔗 Related Projects</b></summary>\n<p dir=\"auto\">Stabilo-Optimize integrates with and complements several specialized tools:</p>\n<ul dir=\"auto\">\n<li>\n<p dir=\"auto\"><strong><a href=\"https://github.com/rfonod/stabilo\">Stabilo</a> 🌀</strong> — The video and trajectory stabilization library that Stabilo-Optimize benchmarks and tunes.</p>\n</li>\n<li>\n<p dir=\"auto\"><strong><a href=\"https://github.com/rfonod/geo-trax\">Geo-trax</a> 🚀</strong> — End-to-end framework for extracting georeferenced vehicle trajectories from drone imagery. Uses Stabilo, tuned via Stabilo-Optimize, as its core stabilization engine.</p>\n</li>\n<li>\n<p dir=\"auto\"><strong><a href=\"https://github.com/rfonod/hbb2obb\">HBB2OBB</a> 📦</strong> — Converts horizontal bounding boxes to oriented bounding boxes using SAM segmentation models. Can be used alongside the Stabilo ecosystem when object orientation is needed for downstream analysis.</p>\n</li>\n</ul>\n</details>\n<h2 dir=\"auto\">Benchmarking Metrics</h2>\n<p dir=\"auto\">Benchmarks use metrics like Homography Estimation Accuracy (HEA) and Mean Intersection over Union (MIoU). MIoU specifically evaluates the accuracy of object-level registration and requires bounding box masks for calculation. Detailed metric definitions and analysis are provided in the manuscript.</p>\n<h2 dir=\"auto\">Citation</h2>\n<p dir=\"auto\">If you use <strong>Stabilo-Optimize</strong> in your research, software, or product, please cite the following resources appropriately:</p>\n<ol dir=\"auto\">\n<li>\n<p dir=\"auto\"><strong>Preferred Citation:</strong> Please cite the associated article for any use of the Stabilo-Optimize, including research, applications, and derivative work (DOI: <a href=\"https://doi.org/10.1016/j.trc.2025.105205\" rel=\"nofollow\">10.1016/j.trc.2025.105205</a>).</p>\n</li>\n<li>\n<p dir=\"auto\"><strong>Repository Citation:</strong> If you reference, modify, or build upon the Stabilo-Optimize software itself, please also cite this Zenodo release.</p>\n</li>\n</ol>\n<h2 dir=\"auto\">Contributing</h2>\n<p dir=\"auto\">Contributions from the community are welcome! If you encounter any issues or have suggestions for improvements, please open a <a href=\"https://github.com/rfonod/stabilo-optimize/issues\">GitHub Issue</a> or submit a pull request.</p>\n<h2 dir=\"auto\">License</h2>\n<p dir=\"auto\">This project is distributed under the MIT License. See the <a href=\"LICENSE\">LICENSE</a> file for more details.</p>",
+  "creators": [
+    {
+      "name": "Fonod, Robert",
+      "affiliation": "EPFL",
+      "orcid": "0000-0002-9434-3156"
+    }
+  ],
+  "license": "MIT",
+  "access_right": "open",
+  "language": "eng",
+  "keywords": [
+    "Hyperparameter Optimization",
+    "Grid Search",
+    "Image Registration",
+    "Homography Estimation",
+    "Feature Matching",
+    "RANSAC",
+    "Aerial Video Analysis",
+    "Object Stabilization",
+    "Video Stabilization",
+    "Trajectory Stabilization",
+    "Benchmarking",
+    "Ground Truth-Free Evaluation",
+    "Computer Vision",
+    "Python",
+    "OpenCV",
+    "Drone Imagery",
+    "Traffic Monitoring"
+  ],
+  "communities": [
+    {
+      "identifier": "epfl"
+    }
+  ],
+  "dates": [
+    {
+      "start": "2026-07-08",
+      "end": "2026-07-08",
+      "type": "updated",
+      "description": "Update from v1.0.0 to v1.1.0"
+    }
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/rfonod/stabilo-optimize/tree/v1.1.0",
+      "relation": "isSupplementTo",
+      "resource_type": "software"
+    },
+    {
+      "identifier": "arXiv:2411.02136",
+      "relation": "isDescribedBy",
+      "resource_type": "publication-preprint"
+    },
+    {
+      "identifier": "10.1016/j.trc.2025.105205",
+      "relation": "isDescribedBy",
+      "resource_type": "publication-article"
+    },
+    {
+      "identifier": "https://github.com/rfonod/stabilo/",
+      "relation": "requires",
+      "resource_type": "software"
+    },
+    {
+      "identifier": "https://github.com/rfonod/geo-trax/",
+      "relation": "references",
+      "resource_type": "software"
+    },
+    {
+      "identifier": "https://github.com/rfonod/hbb2obb/",
+      "relation": "references",
+      "resource_type": "software"
+    }
+  ]
+}
