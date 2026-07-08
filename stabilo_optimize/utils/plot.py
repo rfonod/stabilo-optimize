@@ -3,7 +3,7 @@
 # Author: Robert Fonod (robert.fonod@ieee.org)
 
 """
-plot_results.py - Plot the results of the benchmarking process.
+plot.py - Plot the results of the benchmarking process.
 
 This script reads the results of the benchmarking process and plots the results
 for each detector, mask, and CLAHE configuration. The plots show the Mean Bounding
@@ -11,7 +11,7 @@ Box IoU (MIoU), Homography Estimation Accuracy (HEA), and computation time for e
 configuration. The plots can be saved to disk or displayed interactively.
 
 Usage:
-    python utils/plot_results.py <source> [options]
+    stabilo-optimize plot <source> [options]
 
 Arguments:
     source: Filepath to a JSON configuration file or directory with JSON files
@@ -26,7 +26,7 @@ Options:
     --quiet, -q: Whether to suppress console output
 
 Example:
-    python utils/plot_results.py experiments/example/sample.json -s -md 2
+    stabilo-optimize plot experiments/example/sample.json -s -md 2
 """
 
 import argparse
@@ -261,8 +261,8 @@ def configure_plot_appearance(fig: plt.Figure, ax1: plt.Axes, ax2: plt.Axes, mas
     Configure appearance of benchmark plots.
     """
     # Create checkmark/cross for mask and CLAHE settings
-    mask_text = '\u2714' if mask_use else '\u2718'
-    clahe_text = '\u2714' if clahe_use else '\u2718'
+    mask_text = '✔' if mask_use else '✘'
+    clahe_text = '✔' if clahe_use else '✘'
 
     # Set titles and annotations
     if save_plots:
@@ -377,6 +377,11 @@ def parse_cli_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
-if __name__ == "__main__":
+def main() -> None:
+    """Entry point for the 'stabilo-optimize plot' subcommand."""
     args = parse_cli_args()
     plot_results(**vars(args))
+
+
+if __name__ == "__main__":
+    main()

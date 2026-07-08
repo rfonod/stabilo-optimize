@@ -10,7 +10,7 @@ The benchmark results are saved in a .json file for each run and summarized at t
 The benchmark can be resumed from the last run or overwrite the results of the previous benchmark run.
 
 Usage:
-    python benchmark.py <source> [options]
+    stabilo-optimize benchmark <source> [options]
 
 Arguments:
     source          Filepath to a .json configuration file or a directory containing multiple configuration files
@@ -32,6 +32,10 @@ Note:
 - If masks (bounding boxes) are unavailable, set "mask_use" to False in the configuration file
 - For the '--save-visualization' option to run properly, all scenes should have the same resolution
 - The benchmark results are saved in the 'results' directory of the given experiment directory
+- Each run is fully reproducible for a given "seed" (numpy and OpenCV's RNG are both seeded); only
+  Computation_time varies between repeat runs, since it measures actual wall-clock time
+- "gpu": true requires a CUDA-enabled OpenCV build (see stabilo's docs/cuda.md); it mainly affects
+  Computation_time, not HEA/MIoU, since RANSAC-based homography/affine estimation always runs on CPU
 """
 
 import argparse
@@ -52,8 +56,8 @@ import torch
 from stabilo import Stabilizer
 from tqdm import tqdm
 
-from utils.plot import plot_results
-from utils.visualize import get_video_writer, render_stabilization_visuals
+from stabilo_optimize.utils.plot import plot_results
+from stabilo_optimize.utils.visualize import get_video_writer, render_stabilization_visuals
 
 IMG_SUFFIXES: List[str] = ['.jpg', '.jpeg', '.png', '.bmp', '.tiff', '.tif']  # supported image formats
 
@@ -164,8 +168,13 @@ def run_single(
             sep='',
         )
 
-    # Set seed for reproducibility
-    np.random.seed(run_configuration.pop('seed'))
+    # Set seed for reproducibility. np.random.seed covers the injected perturbations
+    # (generate_random_homography, apply_random_photometric_distortion); cv2.setRNGSeed covers
+    # OpenCV's own RNG, used internally by stabilo's RANSAC-based homography/affine estimation
+    # (cv2.findHomography/estimateAffinePartial2D), which np.random.seed does not reach.
+    seed = run_configuration.pop('seed')
+    np.random.seed(seed)
+    cv2.setRNGSeed(seed)
 
     # Get number of runs per scene
     N = run_configuration.pop('N')
@@ -792,6 +801,11 @@ def parse_cli_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
-if __name__ == "__main__":
+def main() -> None:
+    """Entry point for the 'stabilo-optimize benchmark' subcommand."""
     args = parse_cli_args()
     run_benchmarks(args.source, args)
+
+
+if __name__ == "__main__":
+    main()

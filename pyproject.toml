@@ -1,19 +1,39 @@
+# ==============================================================
+# Stabilo Optimize - MIT License
+# ==============================================================
+# Overview:
+# This pyproject.toml file configures the build system and project metadata
+# for the Stabilo Optimize package.
+#
+# Installation:
+#   pip install stabilo-optimize                          # from PyPI
+#   pip install -e .                                      # core (editable)
+#   pip install -e '.[dev]'                               # core + dev
+#   uv venv --python 3.11 && uv pip install -e .          # core (uv; faster)
+#   uv venv --python 3.11 && uv pip install -e '.[dev]'   # core + dev (uv)
+#
+# ==============================================================
+
+[build-system]
+requires = ["setuptools>=77.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "stabilo-optimize"
-version = "1.0.0"
+dynamic = ["version"]
 description = "Stabilo Optimize: A Framework for Comprehensive Evaluation and Analysis for the Stabilo Library"
 authors = [
     { name = "Robert Fonod", email = "robert.fonod@ieee.org" },
 ]
 readme = "README.md"
-license = { file = "LICENSE" }
+license = "MIT"
+license-files = ["LICENSE"]
 requires-python = ">=3.9"
 keywords = ["hyperparameter-optimization", "grid-search", "image-registration", "homography-estimation", "feature-matching", "RANSAC-algorithms", "aerial-video-analysis", "object-stabilization", "computer-vision"]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
-    "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
-    "Programming Language :: Python :: 3",        
+    "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
@@ -26,11 +46,35 @@ classifiers = [
     "Topic :: Multimedia :: Video",
 ]
 
+dependencies = [
+    "stabilo>=1.3.1",
+    "torch>=2.5.1",
+    "pandas>=2.2.3",
+    "matplotlib>=3.9.4",
+    "psutil>=6.1.1",
+    "tqdm>=4.64.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "ruff>=0.11.0",
+]
+
 [project.urls]
 Homepage = "https://github.com/rfonod/stabilo-optimize/"
 Repository = "https://github.com/rfonod/stabilo-optimize/"
 Changelog = "https://github.com/rfonod/stabilo-optimize/releases"
 Issues = "https://github.com/rfonod/stabilo-optimize/issues/"
+
+[project.scripts]
+stabilo-optimize = "stabilo_optimize.cli:main"
+
+[tool.setuptools]
+packages = { find = { where = ["."], include = ["stabilo_optimize", "stabilo_optimize.*"] } }
+
+[tool.setuptools.dynamic]
+version = { attr = "stabilo_optimize.__version__" }
 
 [tool.ruff]
 line-length = 120
@@ -41,3 +85,10 @@ select = ['E', 'F', 'W', 'A', "B", 'PLC', 'PLE', 'PLW', 'I']
 [tool.ruff.format]
 docstring-code-format = true
 quote-style = "preserve"
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = "-ra"
+testpaths = [
+    "tests",
+]
