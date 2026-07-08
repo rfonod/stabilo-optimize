@@ -21,8 +21,24 @@ venv.bak/
 !.vscode/extensions.json
 *.code-workspace
 
+# Distribution / packaging
+build/
+develop-eggs/
+dist/
+eggs/
+.eggs/
+sdist/
+*.egg-info/
+*.egg
+
 # Ruff
 .ruff_cache/
+
+# Python test / typecheck / build caches
+.pytest_cache/
+.mypy_cache/
+.coverage
+coverage.xml
 
 # Mac OS-specific storage files
 .DS_Store
