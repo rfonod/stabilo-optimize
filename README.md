@@ -1,8 +1,12 @@
 # Stabilo Optimize
 
-[![GitHub Release](https://img.shields.io/github/v/release/rfonod/stabilo-optimize?include_prereleases)](https://github.com/rfonod/stabilo-optimize/releases) [![PyPI Version](https://img.shields.io/pypi/v/stabilo-optimize)](https://pypi.org/project/stabilo-optimize/) [![PyPI - Total Downloads](https://img.shields.io/pepy/dt/stabilo-optimize?label=total%20downloads)](https://pepy.tech/project/stabilo-optimize) [![PyPI - Downloads per Month](https://img.shields.io/pypi/dm/stabilo-optimize?color=%234c1)](https://pypi.org/project/stabilo-optimize/) [![CI](https://github.com/rfonod/stabilo-optimize/actions/workflows/ci.yml/badge.svg)](https://github.com/rfonod/stabilo-optimize/actions/workflows/ci.yml) [![Python](https://img.shields.io/badge/python-3.9--3.13-blue)](https://www.python.org/) [![License](https://img.shields.io/github/license/rfonod/stabilo-optimize)](https://github.com/rfonod/stabilo-optimize/blob/main/LICENSE) [![GitHub Issues](https://img.shields.io/github/issues/rfonod/stabilo-optimize)](https://github.com/rfonod/stabilo-optimize/issues) [![Open Access](https://img.shields.io/badge/Journal-10.1016%2Fj.trc.2025.105205-blue)](https://doi.org/10.1016/j.trc.2025.105205) [![arXiv](https://img.shields.io/badge/arXiv-2411.02136-b31b1b.svg)](https://arxiv.org/abs/2411.02136) [![Archived Code](https://img.shields.io/badge/Zenodo-Software%20Archive-blue)](https://zenodo.org/doi/10.5281/zenodo.13828430)
+> ⚠️ **Archived:** this repository is archived and no longer developed. Its successor is [Stabilo Benchmark](https://github.com/rfonod/stabilo-benchmark) 🎯.
 
-**Stabilo-Optimize** is a Python benchmarking tool designed specifically to evaluate and tune methods and hyperparameters of the [Stabilo](https://github.com/rfonod/stabilo) 🌀 library for video and track stabilization tasks. It systematically generates performance evaluations through random perturbations, eliminating the need for ground-truth homographies. This tool significantly simplifies the optimization of stabilization techniques, making it ideal for high-precision tasks in fields such as urban monitoring, traffic analysis, and drone imagery processing.
+[![GitHub Release](https://img.shields.io/github/v/release/rfonod/stabilo-optimize?include_prereleases)](https://github.com/rfonod/stabilo-optimize/releases) [![PyPI Version](https://img.shields.io/pypi/v/stabilo-optimize)](https://pypi.org/project/stabilo-optimize/) [![PyPI - Total Downloads](https://img.shields.io/pepy/dt/stabilo-optimize?label=total%20downloads)](https://pepy.tech/project/stabilo-optimize) [![PyPI - Downloads per Month](https://img.shields.io/pypi/dm/stabilo-optimize?color=%234c1)](https://pypi.org/project/stabilo-optimize/) [![CI](https://github.com/rfonod/stabilo-optimize/actions/workflows/ci.yml/badge.svg)](https://github.com/rfonod/stabilo-optimize/actions/workflows/ci.yml) [![Python](https://img.shields.io/badge/python-3.9--3.13-blue)](https://www.python.org/) [![License](https://img.shields.io/github/license/rfonod/stabilo-optimize)](https://github.com/rfonod/stabilo-optimize/blob/main/LICENSE) [![GitHub Issues](https://img.shields.io/github/issues/rfonod/stabilo-optimize)](https://github.com/rfonod/stabilo-optimize/issues) [![Open Access](https://img.shields.io/badge/Journal-10.1016%2Fj.trc.2025.105205-blue)](https://doi.org/10.1016/j.trc.2025.105205) [![arXiv](https://img.shields.io/badge/arXiv-2411.02136-b31b1b.svg)](https://arxiv.org/abs/2411.02136) [![Archived Code](https://img.shields.io/badge/Zenodo-Software%20Archive-blue)](https://doi.org/10.5281/zenodo.13828429)
+
+**Stabilo-Optimize** is a Python benchmarking tool designed specifically to evaluate and tune methods and hyperparameters of the [Stabilo](https://github.com/rfonod/stabilo) ⚖️ library for video and track stabilization tasks. It systematically generates performance evaluations through random perturbations, eliminating the need for ground-truth homographies. This tool significantly simplifies the optimization of stabilization techniques, making it ideal for high-precision tasks in fields such as urban monitoring, traffic analysis, and drone imagery processing.
+
+> **About the successor:** [Stabilo Benchmark](https://github.com/rfonod/stabilo-benchmark) 🎯 continues this project. Stabilo-Optimize tunes Stabilo under random perturbations of static scenes, the campaign of the [associated article](https://doi.org/10.1016/j.trc.2025.105205). Stabilo Benchmark extends that campaign to complete registration pipelines (feature detector, descriptor, matcher, robust estimator and object masking) on static and real dynamic urban scenes, scored against an audited reference. It is the benchmark of the paper ["Consensus Capture in Reference-Based UAV Video Stabilization: A Benchmark on Dynamic Urban Scenes"](https://arxiv.org/abs/2611.17190) (arXiv preprint), whose inputs and results are in a [data record](https://doi.org/10.5281/zenodo.23623540) on Zenodo.
 
 ![Benchmark Campaign Illustration](https://raw.githubusercontent.com/rfonod/stabilo-optimize/main/assets/benchmark_visualization.webp)
 
@@ -81,13 +85,23 @@ experiments
 
 **Note**: A comprehensive configuration file (`comprehensive_benchmark.json`) is included for illustration purposes. Due to computational costs, users should avoid directly running such an extensive parameter search. Instead, adopt a hierarchical parameter search approach by fixing some hyperparameters and varying others.
 
-Refer to the [Stabilo](https://github.com/rfonod/stabilo) 🚀 library and the associated [article](https://doi.org/10.1016/j.trc.2025.105205) for detailed descriptions of available methods and hyperparameters.
+Refer to the [Stabilo](https://github.com/rfonod/stabilo) ⚖️ library and the associated [article](https://doi.org/10.1016/j.trc.2025.105205) for detailed descriptions of available methods and hyperparameters.
 
 **GPU acceleration:** setting `gpu: true` in the config runs (parts of) Stabilo's pipeline on an NVIDIA GPU — see [`docs/cuda.md`](https://github.com/rfonod/stabilo/blob/main/docs/cuda.md) in the Stabilo repo for building a CUDA-enabled OpenCV and setting it up. This mainly affects `Computation_time`, not tuning outcomes: RANSAC-based homography/affine estimation always runs on CPU, so the HEA/MIoU accuracy metrics are essentially unaffected by this setting.
 
 ## Benchmarking Metrics
 
 Benchmarks use metrics like Homography Estimation Accuracy (HEA) and Mean Intersection over Union (MIoU). MIoU specifically evaluates the accuracy of object-level registration and requires bounding box masks for calculation. Detailed metric definitions and analysis are provided in the manuscript.
+
+<details>
+<summary><b>🔗 Related Projects</b></summary>
+
+- **[Stabilo](https://github.com/rfonod/stabilo) ⚖️**: the video and trajectory stabilization library that Stabilo-Optimize benchmarks and tunes.
+- **[Stabilo Benchmark](https://github.com/rfonod/stabilo-benchmark) 🎯**: the successor of Stabilo-Optimize. Extends its static campaign to complete registration pipelines on static and dynamic urban scenes, and is the benchmark of the [consensus capture paper](https://arxiv.org/abs/2611.17190), with its [data record](https://doi.org/10.5281/zenodo.23623540).
+- **[Geo-trax](https://github.com/rfonod/geo-trax) 🚀**: end-to-end framework for extracting georeferenced vehicle trajectories from drone imagery. Uses Stabilo, tuned via Stabilo-Optimize, as its core stabilization engine.
+- **[HBB2OBB](https://github.com/rfonod/hbb2obb) 🔄**: converts horizontal bounding boxes to oriented bounding boxes using SAM segmentation models. Can be used alongside the Stabilo ecosystem when object orientation is needed for downstream analysis.
+
+</details>
 
 ## Citation
 
@@ -109,24 +123,36 @@ If you use **Stabilo-Optimize** in your research, software, or product, please c
     }
     ```
 
-2. **Repository Citation:** If you reference, modify, or build upon the Stabilo-Optimize software itself, please also cite the corresponding Zenodo release:
+2. **Repository Citation:** When referencing or building on the code itself (replace `1.x.x` with the version you used):
 
     ```bibtex
     @software{fonod2026stabilo-optimize,
       author = {Fonod, Robert},
-      license = {MIT},
-      month = jul,
       title = {Stabilo Optimize: A Framework for Comprehensive Evaluation and Analysis for the Stabilo Library},
-      url = {https://github.com/rfonod/stabilo-optimize},
-      doi = {10.5281/zenodo.13828430},
-      version = {1.1.0},
-      year = {2026}
+      year = {2026},
+      month = jul,
+      version = {1.x.x},
+      license = {MIT},
+      doi = {10.5281/zenodo.13828429},
+      url = {https://github.com/rfonod/stabilo-optimize}
+    }
+    ```
+
+3. **Benchmark Citation:** If you build on the successor benchmark, or use its software or data, please cite the benchmark paper (see [Stabilo Benchmark](https://github.com/rfonod/stabilo-benchmark#citation) for its software and data citations):
+
+    ```bibtex
+    @article{fonod2026benchmark,
+      author  = {Fonod, Robert and Geroliminis, Nikolas},
+      title   = {Consensus Capture in Reference-Based UAV Video Stabilization: A Benchmark on Dynamic Urban Scenes},
+      journal = {arXiv preprint arXiv:2611.17190},
+      year    = {2026},
+      doi     = {10.48550/arXiv.2611.17190}
     }
     ```
 
 ## Contributing
 
-Contributions from the community are welcome! If you encounter any issues or have suggestions for improvements, please open a [GitHub Issue](https://github.com/rfonod/stabilo-optimize/issues) or submit a pull request.
+This repository is archived and accepts no new issues or pull requests. For questions and suggestions, please use the [issues of Stabilo Benchmark](https://github.com/rfonod/stabilo-benchmark/issues), its successor.
 
 ## License
 
