@@ -130,7 +130,7 @@ If you use **Stabilo-Optimize** in your research, software, or product, please c
       author = {Fonod, Robert},
       title = {Stabilo Optimize: A Framework for Comprehensive Evaluation and Analysis for the Stabilo Library},
       year = {2026},
-      month = jul,
+      month = nov,
       version = {1.x.x},
       license = {MIT},
       doi = {10.5281/zenodo.13828429},

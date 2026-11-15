@@ -10,13 +10,13 @@ authors:
     orcid: 'https://orcid.org/0000-0002-9434-3156'
 identifiers:
   - type: doi
-    value: 10.5281/zenodo.13828430
+    value: 10.5281/zenodo.13828429
     description: Zenodo archive
 repository-code: 'https://github.com/rfonod/stabilo-optimize'
 url: 'https://github.com/rfonod/stabilo-optimize'
 license: MIT
-version: 1.1.0
-date-released: '2026-07-08'
+version: 1.1.1
+date-released: '2026-11-15'
 preferred-citation:
   type: article
   title: "Advanced computer vision for extracting georeferenced vehicle trajectories from drone imagery"  
